@@ -33,7 +33,7 @@ namespace SqlSugarTest
                 {
                     id = s.id,
                     date1 = s.date1,
-                    date2 = s.date2//不可空类型会报错
+                    date2 = s.date2//不可空类型会报错2
                 }).First();
             }
             catch (Exception ex)
