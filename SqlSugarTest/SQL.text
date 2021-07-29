@@ -1,0 +1,8 @@
+﻿CREATE TABLE `banlvapp`.`test_sqlsugar` (
+	`id` INT ( 20 ) NOT NULL AUTO_INCREMENT COMMENT '主键',
+	`date1` datetime NULL COMMENT '可空日期',
+	`date2` datetime NOT NULL COMMENT '不可空日期',
+PRIMARY KEY ( `id` ) 
+);
+
+INSERT INTO `banlvapp`.`test_sqlsugar`(`date1`, `date2`) VALUES (now(), now());

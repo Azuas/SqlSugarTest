@@ -1,0 +1,7 @@
+﻿<#
+string dbhost = "XXX";
+string dbport = "XXX";
+string dbname = "XXXX";
+string dbuser = "XXX";
+string dbpwd = "XXX";
+#>

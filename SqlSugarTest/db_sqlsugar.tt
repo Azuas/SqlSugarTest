@@ -1,0 +1,52 @@
+﻿<#@ template language="C#" debug="true" hostspecific="True" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="$(SolutionDir)\libs\MySql.Data.Sugar.dll" #>
+<#@ assembly name="$(SolutionDir)\libs\SqlSugar.dll" #>
+<#@ include file="./db.config.include" #>
+
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating"#>
+<#@ import namespace="SqlSugar" #>
+<#@ output extension="" #>
+<# 
+     //当前项目目录
+    string projectDir = Host.ResolveAssemblyReference("$(ProjectDir)");
+    //解决方案目录
+    string solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)");
+    //保存实体目录
+    string modelsDir = Path.Combine(projectDir, "Models");
+    if (!Directory.Exists(modelsDir))
+    {
+        Directory.CreateDirectory(modelsDir);
+    }
+
+    //数据库连接串
+    var config = new ConnectionConfig();
+    config.ConnectionString = $"Server={dbhost};Port={dbport};Database={dbname};User={dbuser};Password={dbpwd};charset=utf8;Allow Zero Datetime=true;Allow User Variables=True";
+    config.DbType = DbType.MySql;
+    config.IsAutoCloseConnection = true;
+    var db = new SqlSugarClient(config); 
+    db.DbFirst
+    .SettingClassTemplate(s => s = 
+    "{using}\n" +
+    "namespace BanLv.Entities\n" +
+    "{\n" +
+    "{ClassDescription}{SugarTable}\n" +
+    "    public partial class {ClassName}\n" +
+    "    {\n" +
+    "        public {ClassName}()\n" +
+    "        {\n" +
+    "{Constructor}\n" +
+    "        }\n" +
+    "{PropertyName}\n" +
+    "    }\n" +
+    "}")
+    .IsCreateAttribute()
+    .CreateClassFile(modelsDir);  
+#>
+
