@@ -11,7 +11,7 @@ namespace SqlSugarTest
         {
             SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
             {
-                ConnectionString = "Server=121.37.217.173;Port=3306;Charset=utf8mb4;DataBase=banlvapp;Persist Security Info=False;User ID=banlv;Password=banlvapp789~@A;Allow Zero Datetime=true;Allow User Variables=True",//连接符字串
+                ConnectionString = "Server=XXXX;Port=XXXX;Charset=utf8mb4;DataBase=XXX;Persist Security Info=False;User ID=XXX;Password=XXXX;Allow Zero Datetime=true;Allow User Variables=True",//连接符字串
                 DbType = DbType.MySql,
                 IsAutoCloseConnection = true, //不设成true要手动close
                 InitKeyType = InitKeyType.Attribute,
